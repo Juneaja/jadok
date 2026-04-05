@@ -310,21 +310,21 @@
         <div class="filters">
             <div class="filter-group">
                 <button class="filter-btn active" data-spesialis="all">
-                    <i class="fas fa-stethoscope"></i> Semua Spesialis
+                    <i class="fas fa-stethoscope"></i> Semua Dokter
                 </button>
-                <button class="filter-btn" data-spesialis="umum">
+                <button class="filter-btn" data-spesialis="Umum/BPJS">
                     <i class="fas fa-user-md"></i> Umum & BPJS
                 </button>
-                <button class="filter-btn" data-spesialis="syaraf">
+                <button class="filter-btn" data-spesialis="Dokter Syaraf">
                     <i class="fas fa-baby"></i> Penyakit Syaraf
                 </button>
-                <button class="filter-btn" data-spesialis="internist">
+                <button class="filter-btn" data-spesialis="Penyakit Dalam">
                     <i class="fas fa-child"></i> Penyakit Dalam
                 </button>
                 <button class="filter-btn" data-spesialis="gigi">
                     <i class="fas fa-tooth"></i> Gigi
                 </button>
-                <button class="filter-btn" data-spesialis="tht">
+                <button class="filter-btn" data-spesialis="THT">
                     <i class="fas fa-child"></i> THT
                 </button>
             </div>
@@ -339,10 +339,10 @@
                 <span class="schedule-status status-available">✅ Tersedia</span>
             </div>
             <div class="legend-item">
-                <span class="schedule-status status-booking">⏳ Booking</span>
+                <span class="schedule-status status-booking">⏳ Daring/Resep</span>
             </div>
             <div class="legend-item">
-                <span class="schedule-status status-full">❌ Penuh</span>
+                <span class="schedule-status status-full">❌ TUTUP</span>
             </div>
         </div>
     </main>
@@ -353,7 +353,7 @@
             {
                 id: 1,
                 name: "dr. Irawan Sandjojo,Sp.N",
-                specialty: "syaraf",
+                specialty: "Dokter Syaraf",
                 avatar: "Ir",
                 schedules: [
                     { time: "07:00 - selesai", status: "available" },
@@ -364,7 +364,7 @@
             {
                 id: 2,
                 name: "dr. Gendut Wisito,Sp.PD",
-                specialty: "internist",
+                specialty: "Penyakit Dalam",
                 avatar: "GW",
                 schedules: [
                     { time: "09:00 - selesai", status: "available" },
@@ -373,23 +373,21 @@
             },
             {
                 id: 3,
-                name: "Dr. Ahmad Fauzi",
-                specialty: "Umum",
-                avatar: "AF",
+                name: "dr. Raihatul Ambar",
+                specialty: "Umum/BPJS",
+                avatar: "RA",
                 schedules: [
                     { time: "07:00 - 12:00", status: "available" },
-                    { time: "13:00 - 16:00", status: "full" },
-                    { time: "19:00 - 21:00", status: "available" }
                 ]
             },
             {
                 id: 4,
-                name: "Dr. Lina Marlina, Sp.KG",
-                specialty: "Gigi",
-                avatar: "LM",
+                name: "dr. Rani Waskita Kelana",
+                specialty: "Umum/BPJS",
+                avatar: "RWK",
                 schedules: [
-                    { time: "08:30 - 12:30", status: "booking" },
-                    { time: "14:30 - 17:30", status: "available" }
+                    { time: "12:00 - 16:00", status: "available" },
+                    
                 ]
             },
             {
