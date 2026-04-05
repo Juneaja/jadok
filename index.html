@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jadwal Dokter Praktik - Klinik Sehat</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            max-width: 400px;
+            margin: 0 2rem;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: 2px solid #e1e5e9;
+            border-radius: 25px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+
+        main {
+            margin-top: 2rem;
+        }
+
+        .page-title {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .filters {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: 2px solid #e1e5e9;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .doctor-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+
+        .doctor-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+
+        .doctor-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .specialty {
+            color: #667eea;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .schedule-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: #f8f9ff;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .schedule-item:hover {
+            background: #e8ecff;
+            transform: scale(1.02);
+        }
+
+        .schedule-time {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .schedule-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-available {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-full {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-booking {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .no-schedule {
+            text-align: center;
+            padding: 3rem;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-box {
+                margin: 0;
+                order: 3;
+            }
+
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+
+        .legend {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .legend-item {
+            display: inline-block;
+            margin: 0 1rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-heartbeat"></i> Klinik Sehat
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Cari dokter atau spesialis...">
+                </div>
+                <div>
+                    <button class="filter-btn active" data-filter="all">Semua</button>
+                    <button class="filter-btn" data-filter="hari-ini">Hari Ini</button>
+                    <button class="filter-btn" data-filter="besok">Besok</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">
+            <i class="fas fa-calendar-check"></i> Jadwal Dokter
+        </h1>
+
+        <div class="filters">
+            <div class="filter-group">
+                <button class="filter-btn active" data-spesialis="all">
+                    <i class="fas fa-stethoscope"></i> Semua Spesialis
+                </button>
+                <button class="filter-btn" data-spesialis="umum">
+                    <i class="fas fa-user-md"></i> Umum
+                </button>
+                <button class="filter-btn" data-spesialis="anak">
+                    <i class="fas fa-baby"></i> Anak
+                </button>
+                <button class="filter-btn" data-spesialis="gigi">
+                    <i class="fas fa-tooth"></i> Gigi
+                </button>
+                <button class="filter-btn" data-spesialis="kandungan">
+                    <i class="fas fa-child"></i> Kandungan
+                </button>
+            </div>
+        </div>
+
+        <div class="schedule-grid" id="scheduleGrid">
+            <!-- Dokter akan dimuat oleh JavaScript -->
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <span class="schedule-status status-available">✅ Tersedia</span>
+            </div>
+            <div class="legend-item">
+                <span class="schedule-status status-booking">⏳ Booking</span>
+            </div>
+            <div class="legend-item">
+                <span class="schedule-status status-full">❌ Penuh</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Data dokter dan jadwal
+        const doctors = [
+            {
+                id: 1,
+                name: "Dr. Budi Santoso, Sp.OG",
+                specialty: "Kandungan",
+                avatar: "BS",
+                schedules: [
+                    { time: "08:00 - 12:00", status: "available" },
+                    { time: "14:00 - 17:00", status: "booking" },
+                    { time: "19:00 - 21:00", status: "full" }
+                ]
+            },
+            {
+                id: 2,
+                name: "Dr. Sari Indah, Sp.A",
+                specialty: "Anak",
+                avatar: "SI",
+                schedules: [
+                    { time: "09:00 - 13:00", status: "available" },
+                    { time: "15:00 - 18:00", status: "available" }
+                ]
+            },
+            {
+                id: 3,
+                name: "Dr. Ahmad Fauzi",
+                specialty: "Umum",
+                avatar: "AF",
+                schedules: [
+                    { time: "07:00 - 12:00", status: "available" },
+                    { time: "13:00 - 16:00", status: "full" },
+                    { time: "19:00 - 21:00", status: "available" }
+                ]
+            },
+            {
+                id: 4,
+                name: "Dr. Lina Marlina, Sp.KG",
+                specialty: "Gigi",
+                avatar: "LM",
+                schedules: [
+                    { time: "08:30 - 12:30", status: "booking" },
+                    { time: "14:30 - 17:30", status: "available" }
+                ]
+            },
+            {
+                id: 5,
+                name: "Dr. Rina Kartika, Sp.OG",
+                specialty: "Kandungan",
+                avatar: "RK",
+                schedules: [
+                    { time: "10:00 - 14:00", status: "available" },
+                    { time: "16:00 - 19:00", status: "full" }
+                ]
+            },
+            {
+                id: 6,
+                name: "Dr. Yusuf Rahman",
+                specialty: "Umum",
+                avatar: "YR",
+                schedules: [
+                    { time: "08:00 - 11:00", status: "available" },
+                    { time: "13:00 - 16:00", status: "available" }
+                ]
+            }
+        ];
+
+        let currentFilter = 'all';
+        let currentSpesialis = 'all';
+
+        function renderDoctors(doctorsToShow = doctors) {
+            const grid = document.getElementById('scheduleGrid');
+            grid.innerHTML = '';
+
+            if (doctorsToShow.length === 0) {
+                grid.innerHTML = `
+                    <div class="doctor-card no-schedule">
+                        <i class="fas fa-search" style="font-size: 3rem; color: #ccc; margin-bottom: 1rem;"></i>
+                        <h3>Tidak ada jadwal ditemukan</h3>
+                        <p>Coba ubah filter pencarian atau spesialis</p>
+                    </div>
+                `;
+                return;
+            }
+
+            doctorsToShow.forEach(doctor => {
+                const card = document.createElement('div');
+                card.className = 'doctor-card';
+                card.innerHTML = `
+                    <div class="doctor-avatar">${doctor.avatar}</div>
+                    <div class="doctor-name">${doctor.name}</div>
+                    <div class="specialty">${doctor.specialty}</div>
+                    ${doctor.schedules.map(schedule => `
+                        <div class="schedule-item">
+                            <span class="schedule-time">${schedule.time}</span>
+                            <span class="schedule-status status-${schedule.status}">
+                                ${getStatusText(schedule.status)}
+                            </span>
+                        </div>
+                    `).join('')}
+                    <button class="book-btn" onclick="bookAppointment(${doctor.id})">
+                        <i class="fas fa-calendar-plus"></i> Booking Sekarang
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function getStatusText(status) {
+            const statusText = {
+                available: '✅ Tersedia',
+                booking: '⏳ Booking',
+                full: '❌ Penuh'
+            };
+            return statusText[status] || status;
+        }
+
+        function filterDoctors() {
+            let filtered = doctors;
+
+            // Filter berdasarkan spesialis
+            if (currentSpesialis !== 'all') {
+                filtered = filtered.filter(doctor => 
+                    doctor.specialty.toLowerCase().includes(currentSpesialis)
+                );
+            }
+
+            renderDoctors(filtered);
+        }
+
+        function bookAppointment(doctorId) {
+            const doctor = doctors.find(d => d.id === doctorId);
+            alert(`✅ Booking berhasil untuk ${doctor.name}!\nSilakan hubungi klinik untuk konfirmasi.`);
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = doctors.filter(doctor => 
+                doctor.name.toLowerCase().includes(searchTerm) ||
+                doctor.specialty.toLowerCase().includes(searchTerm)
+            );
+            renderDoctors(filtered);
+        });
+
+        // Filter buttons
+        document.querySelectorAll('[data-spesialis]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-spesialis]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentSpesialis = this.dataset.spesialis;
+                filterDoctors();
+            });
+        });
+
+        document.querySelectorAll('[data-filter]').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('[data-filter]').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Initial render
+        renderDoctors();
+    </script>
+</body>
+</html>
