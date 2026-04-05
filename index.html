@@ -411,8 +411,8 @@
 
             {
                 id: 7,
-                name: "drg. Zaky",
-                specialty: "tht",
+                name: "dr. Zaky",
+                specialty: "spesialis tht",
                 avatar: "Z",
                 schedules: [
                     { time: "18:00 - selesai", status: "available" }
@@ -453,8 +453,8 @@
                             </span>
                         </div>
                     `).join('')}
-                    <button class="book-btn" onclick="bookAppointment(${doctor.id})">
-                        <i class="fas fa-calendar-plus"></i> Booking Sekarang
+                    <button class="book-btn" onclick="#">
+                        <i class="fas fa-calendar-plus"></i> LIBUR Tanggal Merah dan Hari Libur Nasional 
                     </button>
                 `;
                 grid.appendChild(card);
@@ -464,8 +464,8 @@
         function getStatusText(status) {
             const statusText = {
                 available: '✅ Tersedia',
-                booking: '⏳ Booking',
-                full: '❌ Penuh'
+                booking: '⏳ Daring/Resep',
+                full: '❌ Tutup'
             };
             return statusText[status] || status;
         }
