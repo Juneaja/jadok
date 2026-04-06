@@ -460,9 +460,8 @@
                 specialty: "spesialis syaraf",
                 avatar: "Ir",
                 schedules: [ 
-                    { time: "selasa - sabtu pagi 07:00 - selesai", status: "available"}, 
-                    { time: "07:00 - selesai", status: "available" },
-                    { time: "18:30 - selesai", status: "available" }
+                    { time: "senin - sabtu pagi 07:00 - selesai", status: "available"}, 
+                    { time: "senin - jumat malam 18:30 - selesai", status: "available" }
                 
                 ]
             }, 
@@ -472,8 +471,8 @@
                 specialty: "penyakit dalam",
                 avatar: "GW",
                 schedules: [
-                    { time: "09:00 - selesai", status: "available" },
-                    { time: "18:00 - selesai", status: "available" }
+                    { time: "senin - kamis pagi 09:00 - selesai", status: "available" },
+                    { time: "senin - kamis malam 18:00 - selesai", status: "available" }
                 ]
             },
             {
@@ -482,7 +481,7 @@
                 specialty: "umum/bpjs",
                 avatar: "RA",
                 schedules: [
-                    { time: "07:00 - 12:00", status: "available" }
+                    { time: "senin - sabtu|07:00 - 12:00", status: "available" }
                 ]
             },
             {
@@ -491,7 +490,7 @@
                 specialty: "umum/bpjs",
                 avatar: "RWK",
                 schedules: [
-                    { time: "12:00 - 16:00", status: "available" }
+                    { time: "senin - sabtu|12:00 - 16:00", status: "available" }
                     
                 ]
             },
@@ -501,7 +500,7 @@
                 specialty: "umum/bpjs",
                 avatar: "WWG",
                 schedules: [
-                    { time: "16:00 - 20:00", status: "available" }
+                    { time: "senin - sabtu|16:00 - 20:00", status: "available" }
                 ]
             },
             {
@@ -510,7 +509,7 @@
                 specialty: "gigi",
                 avatar: "CU",
                 schedules: [
-                    { time: "13:00 - 17:00", status: "available" }
+                    { time: "senin - jumat|13:00 - 17:00", status: "available" }
                 ]
             }, 
 
@@ -520,7 +519,7 @@
                 specialty: "spesialis tht",
                 avatar: "Z",
                 schedules: [
-                    { time: "18:00 - selesai", status: "available" }
+                    { time: "senin,selasa,kamis 18:00 - selesai", status: "available" }
                 ]
             }
         ];
@@ -568,7 +567,7 @@
 
         function getStatusText(status) {
             const statusText = {
-                available: '✅ Tersedia',
+                available: '✅ Praktik',
                 booking: '⏳ Daring/Resep',
                 full: '❌ Tutup'
             };
