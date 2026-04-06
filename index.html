@@ -347,6 +347,47 @@
                 font-size: 0.9rem;
             }
         }
+
+        /* Floating WhatsApp */
+        .floating-whatsapp {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background: #25D366;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+            z-index: 1000;
+            animation: bounce 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .floating-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37,211,102,0.6);
+            text-decoration: none;
+            color: white;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
     </style>
 </head>
 <body>
