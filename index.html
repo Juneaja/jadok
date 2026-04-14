@@ -9,7 +9,24 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 
     <style>
-    
+     .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -404,6 +421,10 @@
                
             </div>
         </div>
+        <a href="document.pdf" download class="btn-download">
+        <i class="fas fa-download"></i>
+        Instal Aplikasi
+    </a>
     </header>
 
     <main class="container">
