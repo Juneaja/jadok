@@ -10,12 +10,26 @@
 
     <style>
 .cs-float {
-    position: fixed;
-    bottom: 5px;
-    right: 5px;
-    z-index: 1000;
-}
-
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background: #25D366;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+            z-index: 1000;
+            animation: bounce 2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
 .cs-float a {
     display: flex;
     flex-direction: column;
@@ -721,7 +735,7 @@
     </a>
     <br/><br/>
     <div class="cs-float">
-    <a href="https://sicika.vercel.app" class="floating-whatsapp" target="_blank" title="Chat Sicika">
+    <a href="https://sicika.vercel.app" target="_blank" title="Chat Sicika">
         <i class="fas fa-headphones"></i>
     </a>
 </div>
